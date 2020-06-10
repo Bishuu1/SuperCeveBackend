@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bishuu1/CVGenerator.git"
+    "url": "git+https://github.com/Bishuu1/SuperCeveBackend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Bishuu1/CVGenerator/issues"
+    "url": "https://github.com/Bishuu1/SuperCeveBackend/issues"
   },
-  "homepage": "https://github.com/Bishuu1/CVGenerator#readme",
+  "homepage": "https://github.com/Bishuu1/SuperCeveBackend#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
