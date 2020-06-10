@@ -1,0 +1,31 @@
+{
+  "name": "supercevebackend",
+  "version": "1.0.0",
+  "description": "Proyecto para \"Ingeniería de software\" el cual es un sistema de gestión de curriculum vitae para académicos de la Universidad Diego Portales con información extraída de distintas fuentes.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bishuu1/CVGenerator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bishuu1/CVGenerator/issues"
+  },
+  "homepage": "https://github.com/Bishuu1/CVGenerator#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.18",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
