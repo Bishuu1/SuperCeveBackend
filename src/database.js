@@ -1,18 +1,13 @@
-const Mongoose = require('mongoose');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/database', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+const connection = mongoose.connection;
 
-const Data = 'mongodb://localhost/Database';
-
-Mongoose.connect(Data, {
-    useNewUrlParser = true,
-    useCreateIndex = true
-
-});
-
-const connection = Mongoose.connect();
-
+connection.on('error', console.error.bind(console, 'connection error:'));
 connection.once('open', () => {
     console.log('DB is connected!');
 });
+
+
 
 
 

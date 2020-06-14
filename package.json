@@ -2,10 +2,10 @@
   "name": "supercevebackend",
   "version": "1.0.0",
   "description": "Proyecto para \"Ingeniería de software\" el cual es un sistema de gestión de curriculum vitae para académicos de la Universidad Diego Portales con información extraída de distintas fuentes.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +21,9 @@
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "mongoose": "^5.9.18",
     "morgan": "^1.10.0",
     "session": "^0.1.0"
