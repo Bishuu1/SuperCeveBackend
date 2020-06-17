@@ -20,12 +20,15 @@
   "homepage": "https://github.com/Bishuu1/SuperCeveBackend#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "ejs": "^3.1.3",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mongoose": "^5.9.18",
     "morgan": "^1.10.0",
+    "path": "^0.12.7",
     "session": "^0.1.0"
   },
   "devDependencies": {

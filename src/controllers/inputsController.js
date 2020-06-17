@@ -1,5 +1,5 @@
 const inputsCtrl = {};
-const inputsModel = require('../models/usersSchema');
+const inputsModel = require('../models/UsuarioSchema');
 
 
 

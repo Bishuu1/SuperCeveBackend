@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/b3e2e2bf7b.js" crossorigin="anonymous"></script>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <h1>Hola esta es una pagina de testeo de bd!</h1>
+
+    <div class="row mx-auto ">
+            <div class="container">
+            <div class="col">
+                <form action="/Entrada/add" method="POST">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nombre de entrada</label>
+                                <input type="text" name="NombreEntrada" class="form-control">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">TipoEntrada</label>
+                                <input type="text" name="TipoEntrada" class="form-control">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Intervalo de paginas</label>
+                                <input type="text" name="IntervaloPaginas" class="form-control">
+                               </div>
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1">Autores</label>
+                                  <input type="text" name="Autores" class="form-control">
+                              </div>
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1">fecha de entrada</label>
+                                  <input type="date" name="FechaEntrada" class="form-control">
+                              </div>
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1">revista</label>
+                                  <input type="text" name="Revista" class="form-control">
+                              </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">volumen</label>
+                                <input type="number" name="Volumen" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">numero de tomo</label>
+                                <input type="number" name="NumeroTomo" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">categoria</label>
+                                <input type="text" name="Categoria" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">lugar obtenido</label>
+                                <input type="text" name="LugarObtenido" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">institución</label>
+                                <input type="text" name="Institución" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                                       
+                    <button type="submit" class="btn btn-success mx-auto">Submit</button>
+                  </form>
+    
+            </div>
+    </div></div>
+    <div class="container-fluid">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#id</th>
+                    <th scope="col">nombre</th>
+                    <th scope="col">tipoentrada</th>
+                    <th scope="col">Intervalopaginas</th>
+                    <th scope="col">autores</th>
+                    <th scope="col">fecha de entrada</th>
+                    <th scope="col">revista</th>
+                    <th scope="col">volumen</th>
+                    <th scope="col">NumeroTomo</th>
+                    <th scope="col">categoria</th>
+                    <th scope="col">lugar obtenido</th>
+                    <th scope="col">institución</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for(var i=0 ; i<Entradas.length ; i++) {%>
+                  <tr>
+                    <th scope="row"><%= Entradas[i]._id %></th>
+                    <td><%= Entradas[i].NombreEntrada %></td>
+                    <td><%= Entradas[i].TipoEntrada %></td>
+                    <td><%= Entradas[i].IntervaloPaginas %></td>
+                    <td><%= Entradas[i].Autores %></td>
+                    <td><%= Entradas[i].FechaEntrada %></td>
+                    <td><%= Entradas[i].Revista %></td>
+                    <td><%= Entradas[i].Volumen %></td>
+                    <td><%= Entradas[i].NumeroTomo %></td>
+                    <td><%= Entradas[i].Categoria %></td>
+                    <td><%= Entradas[i].LugarObtenido %></td>
+                    <td><%= Entradas[i].Institución %></td>
+                    <td>  <a href="/Entrada/delete/<%= Entradas[i]._id %>" class="btn btn-danger"><i class="fas fa-trash"></i></button>  
+                        <a href="/Entrada/edit/<%= Entradas[i]._id %>" class="btn btn-warning"><i class="fas fa-edit"></i></button></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+
+
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
