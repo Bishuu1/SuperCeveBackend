@@ -32,7 +32,7 @@ UsersCtrl.loginUser = async (req, res) => {
     if (match) {
       const Resultado = await UsuarioSchema.findOne(
         { CorreoUsuario: Usuario.CorreoUsuario },
-        'CorreoUsuario Rut FechaNacimiento LinkGoogleScholar NivelAcceso'
+        'CorreoUsuario Rut FechaNacimiento LinkGoogleScholar NivelAcceso Nombre _id'
       );
       res.send(200, Resultado);
     } else {
@@ -60,6 +60,7 @@ UsersCtrl.updateUser = async (req, res) => {
   await UsuarioSchema.findByIdAndUpdate(
     UsuarioId,
     Update,
+    { new: true }, // Con esta configuracion devuelve efectivamente el usuario actualizado.
     (err, UsuarioUpdated) => {
       if (err) {
         res.status(500).send({ message: 'Error al actualizar' });
