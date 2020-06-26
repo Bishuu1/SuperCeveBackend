@@ -37,6 +37,7 @@ UsersCtrl.loginUser = async (req, res) => {
     return res.status(500).send({ message: "Error de email y/o contraseña" });
   }
 };
+
 UsersCtrl.createUser = async (req, res) => {
   console.log(req.body);
   //Transforma body en esquema y se guarda en Usuario
@@ -56,14 +57,18 @@ UsersCtrl.createUser = async (req, res) => {
 UsersCtrl.updateUser = async (req, res) => {
   const UsuarioId = req.params.UsuarioId;
   const Update = req.body;
+  const Schema = new UsuarioSchema(Update)
+  if (Update.Contraseña){
+    Update.Contraseña = await Schema.encryptContraseña(Update.Contraseña);
+  }
   await UsuarioSchema.findByIdAndUpdate(
     UsuarioId,
     Update,
     (err, UsuarioUpdated) => {
       if (err) {
-        res.status(500).send({ message: "Error al actualizar" });
+         res.status(500).send({ message: "Error al actualizar" });
       } else {
-        res.status(200).send({ UsuarioUpdated }); //devuelve objeto actualizado
+         res.status(200).send({ UsuarioUpdated }); //devuelve objeto actualizado // actualmente tiene un delay respecto al perfil actualizado
       }
     }
   );
