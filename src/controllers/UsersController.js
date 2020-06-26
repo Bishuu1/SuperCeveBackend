@@ -1,11 +1,11 @@
 const UsersCtrl = {};
-const UsuarioSchema = require("../Models/UsuarioSchema");
+const UsuarioSchema = require('../Models/UsuarioSchema');
 
 UsersCtrl.getUsers = async (req, res) => {
   await UsuarioSchema.find({}, (err, Usuarios) => {
     //CONSULTA QUE BUSCA LOS USUARIOS
-    if (err) return res.status(500).send.length({ message: "error" });
-    if (!Usuarios) return res.status(404).send({ message: "Error al buscar" });
+    if (err) return res.status(500).send.length({ message: 'error' });
+    if (!Usuarios) return res.status(404).send({ message: 'Error al buscar' });
     res.send(200, { Usuarios }); //RESPUESTA TODAS LOS USUARIOS
   });
 };
@@ -14,8 +14,8 @@ UsersCtrl.getUser = async (req, res) => {
   const UsuarioId = req.params.UsuarioId;
   const Usuario = await UsuarioSchema.findById(UsuarioId, (err, Usuario) => {
     //CONSULTA QUE BUSCA EL USUARIO POR ID
-    if (err) return res.status(500).send({ message: "Error" });
-    if (!Usuario) return res.status(404).send({ message: "Error al buscar" });
+    if (err) return res.status(500).send({ message: 'Error' });
+    if (!Usuario) return res.status(404).send({ message: 'Error al buscar' });
     res.status(200).send({ Usuario }); //RESPUESTA 1 USUARIO
   });
 };
@@ -25,29 +25,30 @@ UsersCtrl.loginUser = async (req, res) => {
   const UsuarioBdd = await UsuarioSchema.findOne({
     CorreoUsuario: req.body.CorreoUsuario,
   });
-  const match = await UsuarioBdd.matchContraseña(req.body.Contraseña);
-  console.log(match);
-  if (match) {
-    const Resultado = await UsuarioSchema.findOne(
-      { CorreoUsuario: Usuario.CorreoUsuario },
-      "CorreoUsuario Rut FechaNacimiento LinkGoogleScholar NivelAcceso"
-    );
-    res.send(200, Resultado);
+  if (!UsuarioBdd) {
+    return res.status(500).send({ message: 'Error de email y/o contraseña' });
   } else {
-    return res.status(500).send({ message: "Error de email y/o contraseña" });
+    const match = await UsuarioBdd.matchContraseña(req.body.Contraseña);
+    if (match) {
+      const Resultado = await UsuarioSchema.findOne(
+        { CorreoUsuario: Usuario.CorreoUsuario },
+        'CorreoUsuario Rut FechaNacimiento LinkGoogleScholar NivelAcceso Nombre _id'
+      );
+      res.send(200, Resultado);
+    } else {
+      return res.status(500).send({ message: 'Error de email y/o contraseña' });
+    }
   }
 };
 
 UsersCtrl.createUser = async (req, res) => {
-  console.log(req.body);
   //Transforma body en esquema y se guarda en Usuario
   const Usuario = new UsuarioSchema(req.body);
   Usuario.Contraseña = await Usuario.encryptContraseña(req.body.Contraseña);
   //Almacena en la bd
   await Usuario.save((err, UsuarioGuardado) => {
     if (err) {
-      console.log(err);
-      return res.status(500).send({ message: "Error al guardar" });
+      return res.status(500).send({ message: 'Error al guardar' });
     } else {
       res.send(200, { UsuarioGuardado }); //RESPUESTA USUARIO GUARDADA
     }
@@ -64,11 +65,12 @@ UsersCtrl.updateUser = async (req, res) => {
   await UsuarioSchema.findByIdAndUpdate(
     UsuarioId,
     Update,
+    { new: true }, // Con esta configuracion devuelve efectivamente el usuario actualizado.
     (err, UsuarioUpdated) => {
       if (err) {
          res.status(500).send({ message: "Error al actualizar" });
       } else {
-         res.status(200).send({ UsuarioUpdated }); //devuelve objeto actualizado // actualmente tiene un delay respecto al perfil actualizado
+         res.status(200).send({ UsuarioUpdated }); //devuelve objeto actualizado 
       }
     }
   );
@@ -78,13 +80,13 @@ UsersCtrl.deleteUser = async (req, res) => {
   const UsuarioId = req.params.UsuarioId;
   await UsuarioSchema.findById(UsuarioId, (err, Usuario) => {
     if (err) {
-      res.status(500).send({ message: "Error al buscar" });
+      res.status(500).send({ message: 'Error al buscar' });
     } else {
       Usuario.remove((err) => {
         if (err) {
-          res.status(500).send({ message: "Error al eliminar" });
+          res.status(500).send({ message: 'Error al eliminar' });
         } else {
-          res.status(200).send({ message: "Se elimino correctamente" });
+          res.status(200).send({ message: 'Se elimino correctamente' });
         }
       });
     }
