@@ -13,7 +13,7 @@ router
   .post(createTemplate); //trae formulario
 
 router
-  .route("/:UsuarioId")
+  .route("/:TemplateId")
   .get(getTemplate) //muestra uno
   .put(updateTemplate) //actualiza
   .delete(deleteTemplate); //elimina

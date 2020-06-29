@@ -3,8 +3,11 @@ const { Schema, model } = require("mongoose");
 const TempleateSchema = new Schema(
   {
     Nombre: String,
-    Description: String,
-    Element: Array,
+    Descripcion: String,
+    Color: String,
+    Fuente: String,
+    TipoPlantilla:String,
+    Usuario:String
   },
   {
     timestamps: true,
