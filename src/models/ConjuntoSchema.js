@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const ConjuntoSchema = new Schema(
   {
@@ -15,4 +15,4 @@ const ConjuntoSchema = new Schema(
   }
 );
 
-module.exports = model("Conjunto", ConjuntoSchema);
+module.exports = model('Conjunto', ConjuntoSchema);
