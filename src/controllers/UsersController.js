@@ -147,28 +147,30 @@ UsersCtrl.updateUser = async (req, res) => {
   if (Update.Contraseña) {
     Update.Contraseña = await Schema.encryptContraseña(Update.Contraseña);
   }
-  if (Update.LinkGoogleScholar) {
+  if (Update.updateScholar) {
     scholar
       .profile(Update.LinkGoogleScholar)
       .then((response) => {
         return response.results;
       })
       .then((listData) => {
-        const queues = listData.map((item) => () =>
-          loadCheerio(item.relatedUrl, item, UsuarioId)
-        );
-        Throttle.all(queues, { maxInProgress: 1 }).then((response) => {
-          response.forEach(async (element) => {
-            const input = new EntradaSchema(element);
-            await input.save((err, EntradaGuardada) => {
-              if (err) {
-                return res
-                  .status(500)
-                  .send({ message: 'Error al guardar entrada' });
-              }
+        if (listData.length > 0) {
+          const queues = listData.map((item) => () =>
+            loadCheerio(item.relatedUrl, item, UsuarioId)
+          );
+          Throttle.all(queues, { maxInProgress: 1 }).then((response) => {
+            response.forEach(async (element) => {
+              const input = new EntradaSchema(element);
+              await input.save((err, EntradaGuardada) => {
+                if (err) {
+                  return res
+                    .status(500)
+                    .send({ message: 'Error al guardar entrada' });
+                }
+              });
             });
           });
-        });
+        }
       });
     console.log('se actualizo la entrda');
   }
