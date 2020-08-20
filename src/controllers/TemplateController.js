@@ -3,13 +3,15 @@ const TemplateSchema = require("../models/TemplateSchema");
 
 TemplateCtrl.getTemplate = async (req, res) => {
   await TemplateSchema.find(
-    { Usuario: req.query.Usuario }, 
+    { Usuario: req.query.Usuario },
     (err, Templates) => {
-    //CONSULTA QUE BUSCA LAS PLANTILLAS
-    if (err) return res.status(500).send.length({ message: "error" });
-    if (!Templates) return res.status(404).send({ message: "Error al buscar" });
-    res.send(200, { Templates }); //RESPUESTA TODAS LAS PLANTILLAS
-  });
+      //CONSULTA QUE BUSCA LAS PLANTILLAS
+      if (err) return res.status(500).send.length({ message: "error" });
+      if (!Templates)
+        return res.status(404).send({ message: "Error al buscar" });
+      res.send(200, { Templates }); //RESPUESTA TODAS LAS PLANTILLAS
+    }
+  );
 };
 
 TemplateCtrl.createTemplate = async (req, res) => {
